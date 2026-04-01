@@ -1,0 +1,17 @@
+name: Unzip Artifact
+
+on:
+  workflow_dispatch
+
+jobs:
+  unzip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: unzip -o artplay_launcher-main.zip
+      - run: |
+          git config user.email "action@github.com"
+          git config user.name "GitHub Action"
+          git add .
+          git commit -m "Extract zip" || true
+          git push
